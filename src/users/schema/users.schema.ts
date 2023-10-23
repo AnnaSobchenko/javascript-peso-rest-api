@@ -14,6 +14,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 export class User {
   @Prop()
   email: string;
+
   @Prop()
   password: string;
 }
