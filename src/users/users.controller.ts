@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UsersService } from "./users.service";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { User } from "./schema/users.schema";
+import { User } from "../schema/users.schema";
 import { GetAllUsersDto } from "./dto/get-all-users.dto";
 
 @ApiTags("Users")
@@ -13,14 +13,14 @@ export class UsersController {
   @ApiOperation({ summary: "Create new user" })
   @ApiResponse({ status: 200, type: CreateUserDto })
   @Post()
-  createUser(@Body() userDto: User) {
+  createUserConroller(@Body() userDto: User) {
     return this.userService.createUser(userDto);
   }
 
   @ApiOperation({ summary: "Get all users" })
   @ApiResponse({ status: 200, type: [GetAllUsersDto] })
   @Get()
-  getAll() {
+  getAllConroller() {
     return this.userService.getAllUsers();
   }
 }

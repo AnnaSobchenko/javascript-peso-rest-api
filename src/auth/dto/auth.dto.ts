@@ -1,14 +1,15 @@
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { IsString } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
-export class CreateUserDto {
+export class AuthDto {
   @ApiProperty({ example: "user@mail.com", description: "Users' email" })
-  @IsNotEmpty()
-  @IsEmail({}, { message: "Please enter correct email" })
   @IsString()
   readonly email: string;
 
-  @ApiProperty({ example: "user11212mail478com", description: "Users' id" })
+  @ApiProperty({
+    example: "user1235165mail7897com",
+    description: "Users' email",
+  })
   @IsString()
   readonly _id: string;
 
@@ -35,13 +36,4 @@ export class CreateUserDto {
   })
   @IsString()
   readonly token: string;
-
-  constructor(model) {
-    this.email = model.email;
-    this._id = model._id;
-    this.name = model.name;
-    this.refreshToken = model.refreshToken;
-    this.role = model.role;
-    this.token = model.token;
-  }
 }
