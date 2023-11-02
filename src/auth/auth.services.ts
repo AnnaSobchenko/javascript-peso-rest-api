@@ -1,4 +1,3 @@
-import { Model } from "mongoose";
 import {
   HttpException,
   HttpStatus,
@@ -36,6 +35,26 @@ export class AuthService {
     const { email, name, role, _id } = user;
     const userFull = { email, name, role, _id, token, refreshToken };
     return await this.userService.updateUser(userFull);
+  }
+
+  async signinUser(dto: User) {
+    const userIn = await this.userService.getUserByEmail(dto.email);
+
+    if (!userIn) {
+      throw new HttpException(
+        "You're not registration",
+        HttpStatus.BAD_REQUEST
+      );
+    }
+
+    const passwordEquals = await bcrypt.compare(dto.password, userIn.password);
+
+    if (userIn && passwordEquals) {
+      const { token, refreshToken } = await this.generateTokens(userIn);
+      const userFull = { email: userIn.email, token, refreshToken };
+      return await this.userService.updateUser(userFull);
+    }
+    throw new UnauthorizedException("Error email or password");
   }
 
   private async generateTokens(user: CreateUserDto) {

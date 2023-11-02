@@ -8,11 +8,11 @@ export class UpateUserDto {
 
   @ApiProperty({ example: "user11212mail478com", description: "Users' id" })
   @IsString()
-  readonly _id: string;
+  readonly _id?: string;
 
   @ApiProperty({ example: "UserName", description: "Users' name" })
   @IsString()
-  readonly name: string;
+  readonly name?: string;
 
   @ApiProperty({
     example:
@@ -20,11 +20,11 @@ export class UpateUserDto {
     description: "Users' refresh",
   })
   @IsString()
-  readonly refreshToken: string;
+  readonly refreshToken?: string;
 
   @ApiProperty({ example: "user", description: "Users' role" })
   @IsString()
-  readonly role: string;
+  readonly role?: string;
 
   @ApiProperty({
     example:
@@ -32,7 +32,7 @@ export class UpateUserDto {
     description: "Users' token",
   })
   @IsString()
-  readonly token: string;
+  readonly token?: string;
 
   constructor(model) {
     this.email = model.email;
