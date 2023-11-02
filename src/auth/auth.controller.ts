@@ -1,14 +1,28 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {
+  Body,
+  Controller,
+  Post,
+  Request,
+  UseGuards,
+  HttpCode,
+} from "@nestjs/common";
+import {
+  ApiCookieAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from "@nestjs/swagger";
 import { AuthService } from "./auth.services";
 import { AuthDto } from "./dto/auth.dto";
 import { User } from "src/schema/users.schema";
+import { JwtAuthGuard } from "./jwt-auth.guard";
 
 @ApiTags("Auth")
 @Controller("auth")
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @ApiCookieAuth()
   @ApiOperation({ summary: "New user sign up" })
   @ApiResponse({ status: 200, type: AuthDto })
   @Post("/signup")
@@ -20,5 +34,13 @@ export class AuthController {
   @Post("/signin")
   signinUserConroller(@Body() authDto: User) {
     return this.authService.signinUser(authDto);
+  }
+
+  @ApiOperation({ summary: "User logout" })
+  @HttpCode(204)
+  @UseGuards(JwtAuthGuard)
+  @Post("/logout")
+  logoutUserConroller(@Request() token) {
+    return this.authService.logoutUser(token);
   }
 }

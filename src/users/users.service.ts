@@ -6,6 +6,7 @@ import { User } from "../schema/users.schema";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpateUserDto } from "./dto/update.dto";
 import { GetAllUsersDto } from "./dto/get-all-users.dto";
+import { UpateUserByTokenDto } from "./dto/updateByToken.dto";
 
 @Injectable()
 export class UsersService {
@@ -25,6 +26,17 @@ export class UsersService {
     );
     const userNew = new CreateUserDto(user);
     return userNew;
+  }
+
+  async updateUserByToken(dto: UpateUserByTokenDto): Promise<IUser> {
+    const { tokenUser } = dto;
+    await this.userModel.findOneAndUpdate(
+      { token: tokenUser },
+      { ...dto },
+      { new: true }
+    );
+
+    return;
   }
 
   async getAllUsers(): Promise<IAllUsers[]> {

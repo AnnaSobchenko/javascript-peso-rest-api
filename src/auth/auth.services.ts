@@ -54,7 +54,15 @@ export class AuthService {
       const userFull = { email: userIn.email, token, refreshToken };
       return await this.userService.updateUser(userFull);
     }
+
     throw new UnauthorizedException("Error email or password");
+  }
+
+  async logoutUser({ headers }) {
+    const [bearer, token] = headers.authorization.split(" ");
+    const dto = { tokenUser: token, token: "", refreshToken: "" };
+    await this.userService.updateUserByToken(dto);
+    return;
   }
 
   private async generateTokens(user: CreateUserDto) {

@@ -8,14 +8,22 @@ async function start() {
 
   const config = new DocumentBuilder()
     .setTitle("One Pirate Pesso")
-    .setDescription("rest-api for webgame")
+    .setDescription("REST-API for WebGame")
     .setVersion("1.0.0")
-    .addTag("Website for webgame 'One Pirate Pesso'")
+    .addTag("Website for WebGame 'One Pirate Pesso'")
+    .addCookieAuth("refreshToken")
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup("api/docs", app, document);
+  SwaggerModule.setup("api/docs", app, document, {
+    swaggerOptions: {
+      requestInterceptor: (req) => {
+        req.credentials = "include";
+        return req;
+      },
+    },
+  });
 
   await app.listen(PORT, () => console.log(`Server started on port = ${PORT}`));
 }
