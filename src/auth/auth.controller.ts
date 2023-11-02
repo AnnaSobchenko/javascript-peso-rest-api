@@ -15,7 +15,7 @@ export class AuthController {
   signupUserConroller(@Body() authDto: User) {
     return this.authService.signupUser(authDto);
   }
-  @ApiOperation({ summary: "New user sign up" })
+  @ApiOperation({ summary: "User sign in" })
   @ApiResponse({ status: 200, type: AuthDto })
   @Post("/signin")
   signinUserConroller(@Body() authDto: User) {
