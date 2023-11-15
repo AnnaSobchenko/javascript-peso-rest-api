@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UsersService } from "./users.service";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { User } from "../schema/users.schema";
+import { User } from "../schemas/users.schema";
 import { GetAllUsersDto } from "./dto/get-all-users.dto";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 

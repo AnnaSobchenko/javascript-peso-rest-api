@@ -16,3 +16,11 @@ export interface IAllUsers extends Document {
   name: string;
   role: string;
 }
+export interface INews extends Document {
+  id: string;
+  nameUa: string;
+  textUa: string;
+  nameEn: string;
+  textEn: string;
+  img: string;
+}

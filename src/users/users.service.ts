@@ -2,7 +2,7 @@ import { Model } from "mongoose";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { IAllUsers, IUser } from "src/interfaces";
-import { User } from "../schema/users.schema";
+import { User } from "../schemas/users.schema";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpateUserDto } from "./dto/update.dto";
 import { GetAllUsersDto } from "./dto/get-all-users.dto";
