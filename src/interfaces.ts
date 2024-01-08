@@ -24,3 +24,14 @@ export interface INews extends Document {
   textEn: string;
   img: string;
 }
+
+export interface ITeam extends Document {
+  id: string;
+  nameUa: string;
+  nameEn: string;
+  avatar: string;
+  github: string;
+  linkedin: string;
+}
+
+
